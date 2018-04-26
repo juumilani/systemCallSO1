@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 
 
-asmlinkage long sys_callordenar(pid_t pid) {
+asmlinkage long sys_callkpar(pid_t pid) {
 
 	int i;
 	int vetor[10];
