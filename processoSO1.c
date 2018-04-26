@@ -27,6 +27,7 @@ asmlinkage long sys_callordenar(pid_t pid) {
 	for (i = 0; i < 10; i++){
 		if (vetor[i]%2 == 0)
 			kill(vetor[i], SIGKILL);
+		printf("O processo filho com o pid %d foi morto", vetor[i]);
 	}
 
 }
