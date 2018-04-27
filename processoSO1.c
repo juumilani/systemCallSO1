@@ -1,35 +1,56 @@
-
-#include <linux/unistd.h>
-#include <linux/linkage.h>
+#include <unistd.h>
+//#include <linux/linkage.h>
 #include <linux/sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <string.h>
+
+pid_t vetor[10];
 
 
-asmlinkage long sys_callkpar(pid_t pid) {
+void salvaNumero(int j, pid_t pid1){
+
+	vetor[j] = pid1;
+	if (vetor[j]%2 == 0){
+
+		printf("O processo filho com o pid %d foi morto\n", vetor[j]);
+		kill(vetor[j], SIGKILL);
+	}
+
+}
+
+void  sys_callkpar(pid_t pid) {
 
 	int i;
-	int vetor[10];
+	pid_t pidteste, aux;
+	pid_t pidpai;
 	int status = 0;
+
+	pidpai = pid;
+
+	memset(vetor, 0,sizeof(vetor));
 
 	for (i = 0; i < 10; i++){
 		pidteste = fork();
 
-		if (pidteste == 0) {
-			vetor[i] = getpid();
-			exit(0);
+		if ( pidteste ==  0){
+			aux = getpid();
+			salvaNumero(i, aux);
+			_exit(0);
 		}
-
-		wait(&status); 
-	}
-
-	for (i = 0; i < 10; i++){
-		if (vetor[i]%2 == 0)
-			kill(vetor[i], SIGKILL);
-		printf("O processo filho com o pid %d foi morto", vetor[i]);
 	}
 
 }
 
 
+int main(){
+
+	pid_t pidaux;
+	pidaux = getpid();
+
+	sys_callkpar(pidaux);
+
+	return 0;
+}
