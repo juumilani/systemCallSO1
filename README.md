@@ -10,13 +10,13 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
 1. Descompactar o arquivo Projeto_01.zip, que contem o kernel e a imagem do sistema.
 
 2. Modificar o arquivo *linux-3.17.2/arch/x86/syscalls/syscall_32.tlb*, adcionando a seguinte linha ao final do código:  
-    **357     i386    callkpar                  sys_callkpar**
+    **357&nbsp;i386&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callkpar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys_callkpar**
 3. Adcionar a declaração da função  *nome da nossa função* no final do arquivo *linux-3.17.2/include/linux/syscalls.h*:  
     **asmlinkage void sys_callkpar(pid_t pid);**
 4. Incluir o código **callkpar.c** na pasta *linux-3.17.2/arch/x86/kernel/*.
 
 5. Modificar o Makefile da pasta *linux-3.17.2/arch/x86/kernel/*, para que o nosso arquivo **callkpar.c** seja compilado com o kernel, incluindo a linha:  
-    **obj-y                                   += callkpar.o**
+    **obj-y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+= callkpar.o**
 6. Acessar a pasta *linux-3.17.2/* e compilar o kernel, com o comando:  
     **$ make -j 5 ARCH=i386**
 7. Após isso, compilar o código de teste **test-callkpar.c** com o comando:  
