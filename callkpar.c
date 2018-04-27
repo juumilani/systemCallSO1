@@ -1,6 +1,8 @@
 #include <linux/unistd.h>
 #include <linux/linkage.h>
-#include <sys/types.h>
+#include <linux/syscalls.h>
+#include <linux/string.h>
+#include <linux/kernel.h>
 
 pid_t vetor[10];
 
@@ -9,29 +11,28 @@ void salvaNumero(int j, pid_t pid1){
 	vetor[j] = pid1;
 	if (vetor[j]%2 == 0){
 
-		kprintf("O processo filho com o pid %d foi morto\n", vetor[j]);
-		kill(vetor[j], SIGKILL);
+		printk("O processo filho com o pid %d foi morto\n", vetor[j]);
+		sys_kill(vetor[j], SIGKILL);
 	}
 }
 
 asmlinkage void sys_callkpar(pid_t pid) {
-
+	printk("Syscall iniciada.\n");
 	int i;
 	pid_t pidteste, aux;
 	pid_t pidpai;
-	int status = 0;
 
 	pidpai = pid;
 
 	memset(vetor, 0,sizeof(vetor));
 
 	for (i = 0; i < 10; i++){
-		pidteste = fork();
+		pidteste = sys_fork();
 
 		if ( pidteste ==  0){
-			aux = getpid();
+			aux = sys_getpid();
 			salvaNumero(i, aux);
-			_exit(0);
+			sys_exit(0);
 		}
 	}
 }

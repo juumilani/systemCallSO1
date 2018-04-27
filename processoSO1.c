@@ -1,5 +1,4 @@
 #include <unistd.h>
-//#include <linux/linkage.h>
 #include <linux/sched.h>
 #include <stdio.h>
 #include <stdlib.h>
