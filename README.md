@@ -7,7 +7,7 @@ Para implementação do trabalho, utilizamos o kernel em sua versão 3.17.2, e a
 
 Para testar a implementação da systemcall, realizamos os seguintes passos:
 
-1. Descompactar o arquivo Projeto_01.zip, que contem o kernel e a imagem do sistema.
+1. Descompactar o arquivo Projeto_01.zip, que contem o kernel e a imagem do sistema e colocar os arquivos **test-callkpar.c** e **callkpar.c** na pasta gerada.
 
 2. Modificar o arquivo *linux-3.17.2/arch/x86/syscalls/syscall_32.tlb*, adcionando a seguinte linha ao final do código:  
     **357&nbsp;i386&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callkpar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys_callkpar**
