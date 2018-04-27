@@ -21,10 +21,10 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
     **$ make -j 5 ARCH=i386**
 7. Após isso, compilar o código de teste **test-callkpar.c** com o comando:  
     **$ gcc -m32 -static test-callkpar.c -o test-callkpar**
-8. Agora devemos executar nossa máquina virtual para testar a implementação de nossasystemcall no kernel, utilizando o comando:
+8. Agora devemos executar nossa máquina virtual para testar a implementação de nossasystemcall no kernel, utilizando o comando:  
     **$ qemu-system-i386 -hda DC_SO.img -kernel linux-3.17.2/arch/i386/boot/bzImage -append "ro root=/dev/hda" -hdb test-callkpar**
-9. Após a maquina inciar, logar com as credênciais:
-    **user:root**
+9. Após a maquina inciar, logar com as credênciais:  
+    **user:root**  
     **password:root**
 10. Executar os seguintes comandos para teste da systemcall:  
     **$ cat /dev/hdb > test-callkpar**  
