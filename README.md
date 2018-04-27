@@ -32,9 +32,7 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
     **$ ./test-callkpar**
 
 
------------------------------
-
-**Realizado pelos alunos:**
+### Realizado pelos alunos:
 * Cassiano Maia - RA:726507
 * Julia Milani  - RA:726
 * Mariana Cavichioli Silva - RA:726
