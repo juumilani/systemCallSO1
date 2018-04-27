@@ -16,7 +16,7 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
 4. Incluir o código **callkpar.c** na pasta *linux-3.17.2/arch/x86/kernel/*.
 
 5. Modificar o Makefile da pasta *linux-3.17.2/arch/x86/kernel/*, para que o nosso arquivo **callkpar.c** seja compilado com o kernel, incluindo a linha:  
-    **obj-y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+= callkpar.o**
+    **obj-y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+=&nbsp;callkpar.o**
 6. Acessar a pasta *linux-3.17.2/* e compilar o kernel, com o comando:  
     **$ make -j 5 ARCH=i386**
 7. Após isso, compilar o código de teste **test-callkpar.c** com o comando:  
@@ -34,7 +34,7 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
 
 ### Realizado pelos alunos:
 * Cassiano Maia - RA:726507
-* Julia Milani  - RA:726
-* Mariana Cavichioli Silva - RA:726
+* Julia Milani  - RA:726552
+* Mariana Cavichioli Silva - RA:726568
 
 **Disciplina:** Sistemas Operacionais 01 - Profª Kellen Vivaldini
