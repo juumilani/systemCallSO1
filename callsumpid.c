@@ -7,7 +7,7 @@
 pid_t vetor[5];
 
 
-asmlinkage void sys_callsumpid() {
+asmlinkage pid_t sys_callsumpid() {
 
 	char Identifier[20];
 	pid_t pid[5], teste[5], soma = 0;
@@ -16,10 +16,10 @@ asmlinkage void sys_callsumpid() {
 	memset(vetor, 0, sizeof(vetor));
 
 	for(i=0; i<5; i++){
-   		pid[i] = fork();
+   		pid[i] = sys_fork();
    
    		if (pid[i] == 0){
-			teste[i] = getpid();
+			teste[i] = sys_getpid();
 			//printf("todos: %d\n", teste[i]);
 			soma = soma + teste[i];
 			//printf("soma: %d\n\n", soma);
@@ -28,7 +28,7 @@ asmlinkage void sys_callsumpid() {
 				//printf("somafinal: %d\n\n", soma);	
 
 				for(int j=0; j<5; j++){
-					kill(teste[j], SIGTERM);
+					sys_kill(teste[j], SIGTERM);
 				}
 	
 				return soma;
@@ -39,7 +39,7 @@ asmlinkage void sys_callsumpid() {
 		}else if (pid[i] < 0){
 
 			//printf ("\n Failed to fork");
-			exit(1);
+			sys_exit(1);
 
     		}else {
 			break; 
