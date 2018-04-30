@@ -4,35 +4,47 @@
 #include <linux/string.h>
 #include <linux/kernel.h>
 
-pid_t vetor[10];
+//pid_t vetor[5];
+//pid_t somacontrole = 0;
 
-void salvaNumero(int j, pid_t pid1){
 
-	vetor[j] = pid1;
-	if (vetor[j]%2 == 0){
+pid_t teste(pid_t* somacontrole){
 
-		printk("O processo filho com o pid %d foi morto\n", vetor[j]);
-		sys_kill(vetor[j], SIGKILL);
-	}
-}
-
-asmlinkage void sys_callkpar(pid_t pid) {
-	printk("Syscall iniciada.\n");
+	pid_t pid, somafinal, soma = 0, vetor[5];
 	int i;
-	pid_t pidteste, aux;
-	pid_t pidpai;
 
-	pidpai = pid;
+	for(i=0; i<5; i++){
+   		pid = sys_fork();
+   
+   		if (pid == 0){
+			vetor[i] = sys_getpid();
+			soma = soma + vetor[i];
 
-	memset(vetor, 0,sizeof(vetor));
+		}else {
+			break; 
+    	}
 
-	for (i = 0; i < 10; i++){
-		pidteste = sys_fork();
+    	if(i == 4){
+			somafinal = soma;
+			*somacontrole = soma;
+			return somafinal;
+    	}
+		
+	}
+			
+}
 
-		if ( pidteste ==  0){
-			aux = sys_getpid();
-			salvaNumero(i, aux);
-			sys_exit(0);
-		}
+
+asmlinkage pid_t sys_callkpar(void) {
+
+	pid_t somacontrole = 0;
+
+	pid_t somafinal = teste(&somacontrole);
+
+	if (somafinal == somacontrole){
+		if (somacontrole != 0){
+			return somacontrole;
+		} 
 	}
 }
+

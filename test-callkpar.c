@@ -3,11 +3,12 @@
 #include <unistd.h>
 
 int main(){
-	pid_t pidaux;
-	pidaux = getpid();
-	printf("Pid atual = %d\n", pidaux);
+	//int soma =0 ;
 	printf("Execução do teste da Syscall SysParityKill:\n\n");
-	syscall(357, pidaux);
-	printf("Syscall executada.");
+	//pid_t soma = syscall(357);
+	printf("Soma: %d.\n", syscall(357));
+
+	printf("droga");
 	return 0;
+
 }
