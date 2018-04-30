@@ -8,19 +8,21 @@
 
 //dá fork e checa se o processo filho tem pid par, se tiver, mata ele
 //se nao tiver retorna 1
-int sys_killparchild() {
+int sys_callkpar() {
 
-	pid_t pid, var1;
+	pid_t pid, valor_pid;
 	int status;
 
 	pid = fork();
 
 	if (pid == 0){
-		var1 = getpid();
-		printf("o pid eh %d\n", var1);
-		if (var1%2 == 0){
+
+		valor_pid = getpid();
+		printf("o pid eh %d\n", valor_pid);
+
+		if (valor_pid % 2 == 0){
 			printf("O processo filho foi morto\n");
-			kill (var1, SIGKILL);
+			kill (valor_pid, SIGKILL);
 		}
 		else {
 			return 1;
@@ -35,11 +37,11 @@ int sys_killparchild() {
 
 int main(){
 
-	int teste;
+	int retorno;
 
-	teste = sys_killparchild();
+	retorno = sys_callkpar();
 
-	if (teste == 1){
+	if (retorno == 1){
 		printf("O processo filho tem o PID impar e nao foi morto\n");
 	}
 

@@ -4,15 +4,15 @@
 
 int main(){
 
-	printf("Execução do teste da Syscall SysParityKill:\n\n");
-	int teste;
+	printf("Execução do teste da Syscall:\n\n");
+	int retorno;
 
-	teste = syscall(357);
+	retorno = syscall(357);
 
-	if (teste == 1){
-		printf("O processo filho tem o PID impar e nao foi morto\n");
+	if (retorno == 1){
+		printf("O processo filho tem o PID impar e nao foi morto\n\n");
 	}else{
-		printf("O processo filho foi morto\n");
+		printf("O processo filho foi morto\n\n");
 	}
 
 	return 0;

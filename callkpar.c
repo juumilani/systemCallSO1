@@ -7,18 +7,19 @@
 
 asmlinkage int sys_callkpar(void) {
 
-	pid_t pid, var1;
+	pid_t pid, valor_pid;
 	int status;
 
 	pid = sys_fork();
 
 	if (pid == 0){
-		var1 = sys_getpid();
+		valor_pid = sys_getpid();
 
-		if (var1%2 == 0){
-			sys_kill (var1, SIGKILL);
-		}
-		else {
+		if (valor_pid % 2 == 0){
+
+			sys_kill (valor_pid, SIGKILL);
+			
+		}else {
 			return 1;
 		}
 
