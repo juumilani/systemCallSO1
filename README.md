@@ -1,5 +1,5 @@
 # systemCallSO1
-Neste projeto devemos inserir uma nova system call ao Kernel do Linux. Nossa syscall pega um processo, cria 10 filhos através da call fork() e coloca seus PIDs em um vetor. Após isso, é lido esse vetor e todos os processos filhos que sejam pares são mortos.
+Neste projeto devemos inserir uma nova system call ao Kernel do Linux. Nossa syscall pega um processo, cria 1 filho através da call fork() e verifica se seu PID é ímpar ou par. Se for par, este processo é morto; se não for, apenas retorna 1 ao arquivo de teste.
 
 Para implementação do trabalho, utilizamos o kernel em sua versão 3.17.2, e a imagem de sistema DC_SO.img fornecida em aula.
 
@@ -12,7 +12,7 @@ Para testar a implementação da systemcall, realizamos os seguintes passos:
 2. Modificar o arquivo *linux-3.17.2/arch/x86/syscalls/syscall_32.tlb*, adcionando a seguinte linha ao final do código:  
     **357&nbsp;i386&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callkpar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys_callkpar**
 3. Adcionar a declaração da função  *nome da nossa função* no final do arquivo *linux-3.17.2/include/linux/syscalls.h*:  
-    **asmlinkage void sys_callkpar(pid_t pid);**
+    **asmlinkage int sys_callkpar(void);**
 4. Incluir o código **callkpar.c** na pasta *linux-3.17.2/arch/x86/kernel/*.
 
 5. Modificar o Makefile da pasta *linux-3.17.2/arch/x86/kernel/*, para que o nosso arquivo **callkpar.c** seja compilado com o kernel, incluindo a linha:  
