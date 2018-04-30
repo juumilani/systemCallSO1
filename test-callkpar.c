@@ -3,12 +3,19 @@
 #include <unistd.h>
 
 int main(){
-	//int soma =0 ;
-	printf("Execução do teste da Syscall SysParityKill:\n\n");
-	//pid_t soma = syscall(357);
-	printf("Soma: %d.\n", syscall(357));
 
-	printf("droga");
+	printf("Execução do teste da Syscall SysParityKill:\n\n");
+	int teste;
+
+	teste = syscall(357);
+
+	if (teste == 1){
+		printf("O processo filho tem o PID impar e nao foi morto\n");
+	}else{
+		printf("O processo filho foi morto\n");
+	}
+
 	return 0;
 
 }
+
